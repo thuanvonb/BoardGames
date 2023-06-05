@@ -7,13 +7,11 @@ const cloneBoard = mat => mat[0].length == undefined ? Array.from(mat) : mat.map
 let board_size = () => {
   let w = document.documentElement.clientWidth;
   let h = document.documentElement.clientHeight;
-  let b_w, b_h;
-  if (w > h) {
-    b_h = h * .95 * .9;
-    b_w = h * .95 * .9
-  } else {
-    b_w = w * .95
-    b_h = w * .95
-  }
-  return [Math.round(b_w), Math.round(b_h)]
+  let size;
+  if (w > h)
+    s = h * .9 * .9;
+  else 
+    s = w * .95
+  s = Math.round(s)
+  return [s, s]
 }
