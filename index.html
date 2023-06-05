@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <title>Board game AI</title>
+  <link rel="stylesheet" type="text/css" href="games_style/main.css">
+  <link rel="stylesheet" type="text/css" href="games_style/othello.css">
+  <link rel="stylesheet" type="text/css" href="games_style/topogomoku.css">
+  <link rel="stylesheet" type="text/css" href="games_style/ultimatettt.css">
+  <script src='utils.js'></script>
+  <script src='games/othello.js'></script>
+  <script src='games/topogomoku.js'></script>
+  <script src='games/ultimatettt.js'></script>
+  <script src='ais/minimax.js'></script>
+  <script src='ais/mcts.js'></script>
+  <script src='ais/heuristic_search.js'></script>
+</head>
+<body>
+  <div id='main-cont'>
+    <div id='game-cont'>
+      <svg name='svg-game'>
+        <defs>
+          <g id='x_piece'>
+            <line x1="-20" y1="-20" x2="20" y2="20" stroke="red" stroke-width="3"/>
+            <line x1="-20" y1="20" x2="20" y2="-20" stroke="red" stroke-width="3"/>
+          </g>
+          <g id="o_piece">
+            <circle r="25" cx="0" cy="0" fill="none" stroke="blue" stroke-width="3"/>
+          </g>
+          <g id='x_piece_small'>
+            <line x1="-8" y1="-8" x2="8" y2="8" stroke="red" stroke-width="3"/>
+            <line x1="-8" y1="8" x2="8" y2="-8" stroke="red" stroke-width="3"/>
+          </g>
+          <g id="o_piece_small">
+            <circle r="10" cx="0" cy="0" fill="none" stroke="blue" stroke-width="3"/>
+          </g>
+        </defs>
+      </svg>
+    </div>
+    <div id='control-cont'>
+      <div id='game_select'>
+        <div id='item'>
+          <label>Game:</label>
+          <select name="game">
+            <option value="othello">Othello</option>
+            <option value="topogomoku">TopoGomoku</option>
+            <option value="ultimatettt">Ultimate Tic Tac Toe</option>
+            <!-- <option value="xiangqi">Xiangqi</option> -->
+          </select>
+        </div>
+      </div>
+      <div id='players'>
+        <div id='first-player' class='player'>
+          <h4>Player A</h4>
+          <div class='item'>
+            <label>Player type: </label>
+            <select name='agent'>
+              <option value="human">Human</option>
+              <option value="minimax">Minimax</option>
+              <option value='mcts'>MCTS</option>
+            </select>
+          </div>
+          <div class='minimax_conf hide'>
+            <div class="item">
+              <label>Depth:</label>
+              <input type="number" name="minimax_depth" value="5" min='1' max='10'>
+            </div>
+          </div>
+          <div class='mcts_conf hide'>
+            <div class="item">
+              <label># Sim.:</label>
+              <input type="number" name="mcts_sim" value="3000" min='1000' max='10000'>
+            </div>
+          </div>
+        </div>
+        <div id='second-player' class='player'>
+          <h4>Player B</h4>
+          <div class='item'>
+            <label>Player type: </label>
+            <select name='agent'>
+              <option value="human">Human</option>
+              <option value="minimax">Minimax</option>
+              <option value='mcts'>MCTS</option>
+            </select>
+          </div>
+          <div class='minimax_conf hide'>
+            <div class="item">
+              <label>Depth:</label>
+              <input type="number" name="minimax_depth" value="5" min='1' max='10'>
+            </div>
+          </div>
+          <div class='mcts_conf hide'>
+            <div class="item">
+              <label># Sim.:</label>
+              <input type="number" name="mcts_sim" value="10000" min='1000' max='100000' step='1000'>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='actions'>
+        <div>
+          <div class='item'>
+            <label>Auto start new games</label>
+            <input type="checkbox" name="autostart" checked>
+          </div>
+          <div class="item">
+            <label>Players switch side every <input type="number" name="switchside" value="1" min='0'> games</label>
+          </div>
+          <div class="item">
+            <label>Play for the total of <input type="number" name="games" value="10" min='1'> games</label>
+          </div>
+        </div>
+        <div>
+          <button name='btn_reset'>Reset</button>
+          <button name='btn_switch_side'>Switch side</button>
+          <button name='btn_new_game'>New match</button>
+        </div>
+      </div>
+      <div id='stats'>
+        <div id='matches-result'>
+          <table>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div id='match-history'></div>
+      </div>
+    </div>
+  </div>
+  <script src='main.js'></script>
+</body>
+</html>

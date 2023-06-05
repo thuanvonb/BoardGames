@@ -1,0 +1,142 @@
+#game-cont {
+  position: relative;
+}
+
+#main-cont {
+  display: flex;
+}
+
+@media (orientation: portrait) {
+  #main-cont {
+    flex-direction: column;
+  }
+}
+
+#control-cont {
+  flex-grow: 1;
+  font-size: 1.5em;
+  padding-left: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+#game_select select {
+  width: 15em;
+}
+
+#players .hide {
+  display: none;
+}
+
+#players .item {
+  display: flex;
+  margin: 1vh 0;
+  padding-right: 0.5em;
+}
+
+#players .item label {
+  width: 7em;
+}
+
+#players .item input,
+#players .item select {
+  flex: 1;
+  width: auto;
+/*  margin-right: 1em;*/
+}
+
+input, select {
+  font-size: 1em;
+  width: 6em;
+}
+
+#control-cont > div {
+  display: flex;
+}
+
+#players {
+/*  flex: 1;*/
+  padding-bottom: .5em;
+  border-bottom: 1px solid black;
+}
+
+#players div {
+  flex: 1;
+}
+
+#actions {
+  padding: .5em 0;
+  height: 20%;
+  border-bottom: 1px solid black;
+}
+
+#actions > div {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#actions > div:last-child {
+  justify-content: space-between;
+}
+
+#actions button {
+  height: 2em;
+  font-size: 0.7em;
+}
+
+#actions input[type='checkbox'] {
+  width: 0.7em;
+  height: 0.7em;
+}
+
+#actions input[type='number'] {
+  width: 2em;
+}
+
+#matches-result {
+  padding-top: 0.5em;
+  width: 100%;
+}
+
+#matches-result table {
+  width: 100%;
+  font-size: 0.7em;
+}
+
+#matches-result tr {
+  display: grid;
+  grid-template-columns: 1.5fr repeat(16, 1fr);
+}
+
+#matches-result tr td {
+  border: 1px solid black;
+  text-align: center;
+}
+
+#matches-result tr td.switched {
+  background: black;
+  color: white;
+}
+
+#matches-result tr.title td {
+  font-weight: bold;
+}
+
+#matches-result tr.title td:not(:first-child) {
+  cursor: pointer;
+}
+
+#matches-result tr.title td:not(:first-child):hover {
+  background: yellow;
+}
+
+text {
+  alignment-baseline: central;
+  font-size: 1.3em;
+}
+
+rect.turn {
+  fill: aquamarine;
+}

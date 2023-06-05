@@ -1,0 +1,77 @@
+#othello .board-tile {
+  fill: #008042;
+  stroke: black;
+  stroke-width: 1;
+}
+
+#othello .possible_move {
+  fill: rgba(0, 0, 0, 0.001);
+  stroke: black;
+  stroke-width: 1;
+  cursor: pointer;
+}
+
+#othello .black_piece:not(.possible_move) {
+  fill: #232323;
+  stroke: black;
+  stroke-width: 1;
+}
+
+#othello .black_piece.possible_move:hover {
+  fill: rgba(35, 35, 35, 0.6);
+}
+
+#othello .white_piece:not(.possible_move) {
+  fill: #eeeeee;
+  stroke: black;
+  stroke-width: 1;
+}
+
+#othello .white_piece.possible_move:hover {
+  fill: rgba(255, 255, 255, 0.6);
+}
+
+#othello .empty_piece {
+  fill: none;
+  stroke: none;
+}
+
+#othello .previous_move {
+  stroke: red !important;
+  stroke-width: 3 !important;
+}
+
+#othello #status {
+  position: relative;
+  width: 600px;
+  height: 20px;
+  border: solid 1px black;
+  background: #888;
+}
+
+#othello #blackStatus {
+  background: #232323;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(2/64 * 100%);
+  height: 100%;
+}
+
+#othello #whiteStatus {
+  background: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(2/64 * 100%);
+  height: 100%;
+}
+
+#othello #gamelog td.first-player {
+  background: black;
+  color: white;
+}
+
+#othello .piece_status {
+  text-anchor: middle;
+}

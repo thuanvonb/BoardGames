@@ -1,0 +1,17 @@
+#topogomoku .board-tile {
+  fill: white;
+  stroke: black;
+  stroke-width: 1;
+}
+
+#topogomoku .board-tile.playable:hover {
+  fill: lightgray;
+}
+
+#topogomoku .board-tile.win {
+  fill: #aaffaa !important;
+}
+
+#topogomoku .board-tile.previous_move {
+  fill: #ffff88;
+}

@@ -1,0 +1,22 @@
+#ultimatettt .board-tile {
+  stroke: none;
+  fill: white;
+}
+
+#ultimatettt .board-tile.playable:hover {
+  fill: lightgray;
+}
+
+#ultimatettt .board line {
+  stroke: black;
+}
+
+#ultimatettt .sub-board line {
+  stroke: gray;
+  stroke-width: 2px;
+}
+
+#ultimatettt .sub-board.playable line {
+  stroke: black;
+  stroke-width: 4px;
+}
