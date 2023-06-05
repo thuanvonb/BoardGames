@@ -7,17 +7,99 @@
 }
 
 @media (orientation: portrait) {
+  html {
+    font-size: 3vmin;
+  }
+
   #main-cont {
     flex-direction: column;
   }
+
+  #control-cont {
+    margin-top: 3vmin;
+  }
+
+  #control-cont > div {
+    flex-direction: column;
+  }
+
+  #actions {
+    height: 8em;
+  }
+
+  #actions .item {
+    margin: 1vmin 0;
+  }
+
+  #actions > div {
+    display: flex;
+  }
+
+  #actions > div:first-child {
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  #actions > div:last-child {
+    margin-top: 2vh;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  #actions button {
+    width: 7em;
+    height: 2em;
+  }
+}
+
+@media (orientation: landscape) {
+  html {
+    font-size: 2.4vh;
+  }
+
+  #control-cont {
+    padding-left: 1em;
+  }
+
+  #actions {
+    height: 6em;
+  }
+
+  #actions > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  #actions > div:first-child {
+    flex: 1;
+  }
+
+  #actions > div:last-child {
+    width: 7em;
+  }
+
+  #actions > div:last-child {
+    justify-content: space-between;
+  }
+
+  #actions button {
+    height: 2em;
+    font-size: 0.7em;
+  }
+
 }
 
 #control-cont {
   flex-grow: 1;
   font-size: 1.5em;
-  padding-left: 1em;
   display: flex;
   flex-direction: column;
+}
+
+h4 {
+  margin: 2vmin 0;
 }
 
 #game_select select {
@@ -30,7 +112,7 @@
 
 #players .item {
   display: flex;
-  margin: 1vh 0;
+  margin: 1vmin 0;
   padding-right: 0.5em;
 }
 
@@ -42,7 +124,6 @@
 #players .item select {
   flex: 1;
   width: auto;
-/*  margin-right: 1em;*/
 }
 
 input, select {
@@ -66,24 +147,7 @@ input, select {
 
 #actions {
   padding: .5em 0;
-  height: 20%;
   border-bottom: 1px solid black;
-}
-
-#actions > div {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-#actions > div:last-child {
-  justify-content: space-between;
-}
-
-#actions button {
-  height: 2em;
-  font-size: 0.7em;
 }
 
 #actions input[type='checkbox'] {

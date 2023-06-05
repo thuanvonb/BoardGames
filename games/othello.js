@@ -171,7 +171,7 @@ class Othello {
 
   constructor(svgD3Container=undefined, ai1=undefined, ai2=undefined) {
     this.svg = svgD3Container
-    this.drawBackground(600);
+    this.drawBackground(board_size()[0]);
     this.reset();
     this.ai1 = ai1;
     this.ai2 = ai2;
@@ -209,7 +209,7 @@ class Othello {
   drawBackground(board_size) {
     if (!this.svg)
       return;
-    let info_size = 50;
+    let info_size = board_size*.1;
     this.info_size = info_size
     this.svg.selectChildren().filter((d, i) => i > 0).remove()
     this.svg.attr('id', 'othello')

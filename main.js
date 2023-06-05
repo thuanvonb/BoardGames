@@ -113,7 +113,7 @@ function renderMatchHistory() {
   let totalB = 0;
   log.forEach((d, i) => {
     if (i % 15 == 0) {
-      data = data.concat([['Player'], ['A'], ['B']])
+      data = data.concat([[''], ['A'], ['B']])
       c += 3;
     }
     data[c].push(i+1)

@@ -203,7 +203,7 @@ class UltimateTicTacToe {
 
   constructor(svgD3Container=undefined, ai1=undefined, ai2=undefined) {
     this.svg = svgD3Container
-    this.drawBackground(600);
+    this.drawBackground(board_size()[0]);
     this.ai1 = ai1;
     this.ai2 = ai2;
     this.stateHistory = []
@@ -344,7 +344,7 @@ class UltimateTicTacToe {
   drawBackground(board_size) {
     if (!this.svg)
       return;
-    let info_size = 50;
+    let info_size = board_size*.1;
     this.info_size = info_size
     this.svg.attr('id', 'ultimatettt')
     this.svg.attr('width', board_size).attr('height', board_size + info_size)
