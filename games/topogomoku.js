@@ -345,14 +345,14 @@ class TopoGomoku {
 
     if (this.turn == 1 && this.ai1 && !this.state.isDone()) {
       // console.log("AI_Move A")
-      setTimeout(e => {
+      frameDelay.add(e => {
         this.step(this.ai1.play(this.state, 1))
         // this.drawState();
       }, 100)
     }
     if (this.turn == -1 && this.ai2 && !this.state.isDone()) {
       // console.log("AI_Move B")
-      setTimeout(e => {
+      frameDelay.add(e => {
         this.step(this.ai2.play(this.state, -1))
         // this.drawState();
       }, 100);

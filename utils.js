@@ -15,3 +15,39 @@ let board_size = () => {
   s = Math.round(s)
   return [s, s]
 }
+
+const frameDelay = (() => {
+  let stack = []
+
+  function add(act, delay) {
+    let t = {act, until: Date.now() + delay}
+    for (let i = 0; i < stack.length; ++i) {
+      if (stack[i].until > t.until) {
+        stack.splice(i, 0, t)
+        return obj;
+      }
+    }
+    stack.push(t);
+    return obj;
+  }
+
+  function log() {
+    console.log(stack)
+    return obj
+  }
+
+  function step() {
+    while (stack.length > 0 && stack[0].until < Date.now()) {
+      stack.shift().act();
+    }
+    requestAnimationFrame(step)
+  }
+
+  step();
+
+  let obj = {
+    add, log
+  }
+
+  return obj
+})();

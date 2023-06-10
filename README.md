@@ -3,7 +3,7 @@
 ### What is this about?
 - This is a part of the project for the course CS106 - Artificial Intelligence at University of Information Technology - VNU-HCM.
 - It is a web app consisting of various games played by some AI techniques. The users may play with the others or with the AIs that can be adjusted difficulties.
-- The app is avaiable to test at [here](https://thuanvonb.github.io/BoardGames).
+- The app is available to test at [here](https://thuanvonb.github.io/BoardGames).
 
 ### Games:
 - Currently, the web supports 3 games:

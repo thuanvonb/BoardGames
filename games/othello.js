@@ -341,7 +341,7 @@ class Othello {
     this.drawInfo();
 
     if (this.turn == 1 && this.ai1 && !this.state.isDone()) {
-      setTimeout(e => {
+      frameDelay.add(e => {
         if (!this.ai1)
           return;
         this.step(this.ai1.play(this.state, 1))
@@ -349,7 +349,7 @@ class Othello {
       }, 100)
     }
     if (this.turn == -1 && this.ai2 && !this.state.isDone()) {
-      setTimeout(e => {
+      frameDelay.add(e => {
         if (!this.ai2)
           return;
         this.step(this.ai2.play(this.state, -1))
