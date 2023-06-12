@@ -48,7 +48,7 @@ class TopoGomoku {
       return this.end;
     }
 
-    coordAt(r, c, dr, dc) {
+    static coordAt(r, c, dr, dc) {
       let nr = r + dr;
       let nc = c + dc;
       if (nr < 0)
@@ -70,11 +70,11 @@ class TopoGomoku {
       for (let dr = -1; dr < 2; ++dr) {
         for (let dc = -1; dc < 2; ++dc) if (dr != 0 || dc != 0) {
           let p = {len: 0, blocked: false, tiles: []}
-          let [nr, nc] = this.coordAt(r, c, dr, dc)
+          let [nr, nc] = TopoGomoku.State.coordAt(r, c, dr, dc)
           while ((r != nr || c != nc) && this.data[nr][nc] == m) {
             p.len += 1;
             p.tiles.push([nr, nc]);
-            [nr, nc] = this.coordAt(nr, nc, dr, dc)
+            [nr, nc] = TopoGomoku.State.coordAt(nr, nc, dr, dc)
           }
           p.blocked = this.data[nr][nc] == -m
           dir.push(p)
@@ -315,6 +315,8 @@ class TopoGomoku {
     let tile_size = this.board_size / 8
     this.drawInfo()
 
+    let scaleF = scaleSize(0.72)(8)
+
     let pieces = this.state.data.map((row, i) => row.map((v, j) => ({
       r: i,
       c: j,
@@ -326,6 +328,7 @@ class TopoGomoku {
       .attr('href', d => d.v == 1 ? '#x_piece' : '#o_piece')
       .attr('x', d => (d.c + 0.5) * tile_size)
       .attr('y', d => (d.r + 0.5) * tile_size)
+      .attr('transform', (d, i) => `matrix(${scaleF}, 0, 0, ${scaleF}, ${(d.c + 0.5) * tile_size*(1-scaleF)}, ${(d.r + 0.5) * tile_size*(1-scaleF)})`)
       
     this.gBoard
       .selectAll('rect')
@@ -386,3 +389,53 @@ class TopoGomoku {
     this.infoB.select('rect').classed('turn', this.turn == -1)
   }
 }
+
+function topogomoku_features(state) {
+  let d = state.data;
+  let lines = new Array(32).fill(0).map(v => new Array(16).fill(0))
+  for (let i = 0; i < 8; ++i) {
+    for (let j = 0; j < 8; ++j) {
+      lines[i][j] = lines[i][j+8] = d[i][j];
+      lines[j+8][i] = lines[j+8][i+8] = d[i][j];
+      let d1 = (8+i-j) % 8;
+      lines[d1+16][j] = lines[d1+16][j+8] = d[i][j];
+      let d2 = (8+8-i-j) % 8;
+      lines[d2+24][j] = lines[d2+24][j+8] = d[i][j];
+    }
+  }
+  const compute = line => turn => {
+    let c = line.filter(v => v == -turn).length/2
+    if (c > 2)
+      return -1;
+    if (c < 2)
+      return line.filter(v => v == turn).length / 2;
+    let id = line.map((v, i) => [v, i]).filter(t => t[0] == -turn).map(t => t[1])
+    let winnable = id.convolve([-1, 1])
+      .filter(v => v <= 4)
+      .every(v => v < 2)
+
+    if (!winnable)
+      return -1;
+
+    let start = id[0] + 1 == id[1] ? id[1] : id[0];
+    let x = 0;
+    for (let i = 1; i < 7; ++i)
+      x += line[start+i];
+    return Math.abs(x);
+  }
+  const w = turn => lines.map(compute).map(t => t(turn))
+
+  let first = w(1);
+  let second = w(-1);
+
+  let value = val => first.filter(v => v != val).length - second.filter(v => v != val).length
+
+  return {
+    winnable: value(-1),
+    single: value(1),
+    double: value(2),
+    triple: value(3),
+    quad: value(4)
+  }
+}
+

@@ -13,5 +13,5 @@
 
 ### AI types:
 - There are 2 types of AI implemented:
-  - Minimax with genetic algorithm-powered evaluation function (Othello only).
+  - Minimax with genetic algorithm-powered evaluation function (except Ultimate tic tac toe).
   - Vanilla Monte Carlo tree search with a fixed UCT exploration constant `2.4`.

@@ -1,6 +1,7 @@
 const borderCheck = (n, m) => (i, j) => i*j*(i-n+1)*(j-m+1) == 0
 const cornerCheck = (n, m) => (i, j) => i*(i-n+1) + j*(j-m+1) == 0
 const insideCheck = (n, m) => (a, b) => 0 <= a && a < n && 0 <= b && b < m
+const scaleSize = coef => size => board_size()[0]/size / 50 * coef;
 
 const cloneBoard = mat => mat[0].length == undefined ? Array.from(mat) : mat.map(t => cloneBoard(t))
 
@@ -51,3 +52,11 @@ const frameDelay = (() => {
 
   return obj
 })();
+
+Array.prototype.convolve = function(filter) {
+  let out = []
+  for (let i = 0; i <= this.length - filter.length; ++i) {
+    out.push(filter.map((v, id) => v*this[i+id]).reduce((acc, t) => acc+t, 0))
+  }
+  return out;
+}

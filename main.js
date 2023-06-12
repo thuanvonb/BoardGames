@@ -39,6 +39,18 @@ const createAgent = name => {
       moves: 0.4955,
       imposter: 0.818
     })
+  } else if (game instanceof TopoGomoku) {
+    ai.heuristicVal = state => {
+      let feat = topogomoku_features(state)
+      let weights = {
+        winnable: 0.15,
+        single: 0.51,
+        double: 0.84,
+        triple: 0.93,
+        quad: 0.31
+      }
+      return Object.keys(feat).map(k => feat[k]*weights[k]).reduce((acc, v) => acc + v, 0)
+    }
   } else {
     ai = undefined;
     if (!err)

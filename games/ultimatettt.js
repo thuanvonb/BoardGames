@@ -288,11 +288,13 @@ class UltimateTicTacToe {
       .attr('fill', 'none')
       .attr('stroke', 'none')
 
+    let scaleF = scaleSize(0.75)(3)
+
     group.append('use')
       .datum(d => d)
       .attr('x', 3*tile_size/2)
       .attr('y', 3*tile_size/2)
-      .attr('transform', (d, i) => `matrix(3, 0, 0, 3, ${-3*tile_size}, ${-3*tile_size})`)
+      .attr('transform', (d, i) => `matrix(${scaleF}, 0, 0, ${scaleF}, ${3*tile_size/2*(1-scaleF)}, ${3*tile_size/2*(1-scaleF)})`)
   }
 
   drawBackgroundInfo(board_size) {
@@ -410,13 +412,16 @@ class UltimateTicTacToe {
     // this.ingame.selectAll('rect')
     //   .filter(d => this.state.data[d.br][d.bc][d.r][d.c] != 0)
 
+    let scaleF = scaleSize(0.7)(9)
+    console.log(scaleF)
+
     this.ingame.selectAll('g')
       .selectAll('use')
       .data(d => d)
       .join('use')
       .attr('x', (d, i) => this.tile_size*(i+.5))
       .attr('y', this.tile_size/2)
-      .style('transform', (d, i) => `matrix(0.9, 0, 0, 0.9, ${this.tile_size*(i+.5)*(.1)}, ${this.tile_size/2*(.1)})`)
+      .style('transform', (d, i) => `matrix(${scaleF}, 0, 0, ${scaleF}, ${this.tile_size*(i+.5)*(1 - scaleF)}, ${this.tile_size/2*(1 - scaleF)})`)
       .attr('href', "")
       .filter(d => this.state.data[d.br][d.bc][d.r][d.c] != 0)
       .attr('href', d => this.state.data[d.br][d.bc][d.r][d.c] == 1 ? '#x_piece' : "#o_piece")
