@@ -6,6 +6,7 @@ const moveOrdering = (m1, m2) => pv(m2.r, m2.c) - pv(m1.r, m1.c)
 let err = false
 
 let mcts_default = v => d3.selectAll("input[name='mcts_sim']").property('value', v)
+let minimax_default = v => d3.selectAll("input[name='minimax_depth']").property('value', v)
 
 function onTerminated(r, info, stateHistory) {
   if (r > 0)
@@ -179,10 +180,12 @@ $("select[name='game']").on('change', e => {
   if (e.target.value == 'othello') {
     game = new Othello(d3.select("svg[name='svg-game']"))
     mcts_default(10000)
+    minimax_default(4)
   }
   if (e.target.value == 'topogomoku') {
     game = new TopoGomoku(d3.select("svg[name='svg-game']"))
     mcts_default(25000)
+    minimax_default(2)
   }
   if (e.target.value == 'ultimatettt') {
     game = new UltimateTicTacToe(d3.select("svg[name='svg-game']"))
@@ -204,3 +207,7 @@ $("button[name='btn_switch_side']").click(e => {
   renderMatchHistory();
   game.switchSide()
 })
+
+
+mcts_default(10000)
+minimax_default(4)
