@@ -220,6 +220,13 @@ class UltimateTicTacToe {
     this.actionHistory = []
     this.previousMove = {r: -1, c: -1}
     this.drawState()
+    d3.select('.board')
+      .selectAll('use')
+      .attr('href', '')
+
+    d3.select('.board')
+      .selectAll('rect')
+      .attr('fill', 'none')
   }
 
   step(move) {
